@@ -1,27 +1,29 @@
 #include <stdio.h>
+#include <string.h>
 #include <math.h>     // for using square root 
 #include <stdbool.h>  // to include bool datatype 
 
 void sieveOfEratosthenes(int n){
-	bool numbers[n+1];
+	bool primes[n+1];
 	int i, sqrt_n = sqrt(n)+1, j;
 	
-	memset(numbers, true, sizeof(numbers));
+	memset(primes, true, sizeof(primes));
+	primes[0] = false;
+	primes[1] = false;
 
 	for (i = 2; i < sqrt_n; i++){
-		if (numbers[i]){
+		if (primes[i]){
 			for (j = 2*i; j < n+1; j += i){
-				numbers[j] = false;
+				primes[j] = false;
 			}
 		}
 	}
 
-	for (j=2; j < n; j++){
-		if (numbers[j]){
+	for (j = 2; j < n; j++){
+		if (primes[j]){
 			printf("%d ",j);
 		}
 	}
-
 }
 
 int main(){
